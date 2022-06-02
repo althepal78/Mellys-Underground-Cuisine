@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,6 +24,7 @@ namespace DataAccessLayer.Entities
         [StringLength(500)]
         public string Ingredients { get; set; }
 
+        [NotMapped]
         public IFormFile FormFile { get; set; }
     }
 }
