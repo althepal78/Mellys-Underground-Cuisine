@@ -7,17 +7,22 @@ namespace MellysUndergroundCuisine.Models.ViewModels
     {
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        [MinLength(45)]
         public string Information { get; set; }
 
         [Required]
         [StringLength(500)]
+        [MinLength(25)]
         public string Ingredients { get; set; }
 
-        [Required]
-        public string FilePath { get; set; }
+        
+        public string? FilePath { get; set; }
 
         [NotMapped]
-        public IFormFile FormFile { get; set; }
+        public IFormFile FoodImage { get; set; }
 
 
 

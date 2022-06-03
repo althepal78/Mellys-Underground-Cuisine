@@ -17,7 +17,7 @@ namespace DataAccessLayer.Entities
 
         [Required]
         [StringLength(500)]
-        [MinLength(25)]
+        [MinLength(45)]
         public string Information { get; set; }
 
         [Required]
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Entities
         [MinLength(25)]
         public string Ingredients { get; set; }
 
-        [Required]
+       
         public string FilePath { get; set; }
     }
 }

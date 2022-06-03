@@ -56,26 +56,25 @@ namespace MellysUndergroundCuisine.Controllers
                 return View(dish);
             }
 
-            if (dish.FormFile.ContentType != "image/jpeg" && dish.FormFile.ContentType != "image/png" && dish.FormFile.ContentType != "image/svg+xml")
+            if (dish.FoodImage.ContentType != "image/jpeg" && dish.FoodImage.ContentType != "image/png" && dish.FoodImage.ContentType != "image/svg+xml")
             {                
                 ModelState.AddModelError("File Type Error", "You're only allowed png, jpeg, or svg type files");
                 return View(dish);
             }
             
-            if (dish.FormFile != null)
+            if (dish.FoodImage != null)
             {
                 string folder = "images/foodimages/";
                 // create the path name
-                folder += Guid.NewGuid().ToString() + dish.FormFile.FileName;
+                folder += Guid.NewGuid().ToString() + "_"+ dish.FoodImage.FileName;
                 // combine paths to create the path
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 // make it the filepath So i can link to it 
-                dish.FilePath = serverFolder;
+                dish.FilePath = "/" + folder;
                 // create the connection
-                await dish.FormFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                await dish.FoodImage.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
                // log it out but I can't see it  anyways
 
-                Console.WriteLine("failed to create a file path");
             }
 
             var newDish = _mapper.Map<Dish>(dish);
