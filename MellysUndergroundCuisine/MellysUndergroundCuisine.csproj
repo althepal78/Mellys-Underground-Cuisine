@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\newimages\" />
+    <Folder Include="wwwroot\images\foodimages\" />
     <Folder Include="wwwroot\lib\bootstrap\css\" />
   </ItemGroup>
 

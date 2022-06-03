@@ -13,6 +13,10 @@ namespace MellysUndergroundCuisine.Models.ViewModels
         [StringLength(500)]
         public string Ingredients { get; set; }
 
+        [Required]
+        public string FilePath { get; set; }
+
+        [NotMapped]
         public IFormFile FormFile { get; set; }
 
 

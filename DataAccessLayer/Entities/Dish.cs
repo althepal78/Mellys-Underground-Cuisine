@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccessLayer.Entities
 {
-    [Authorize]
+   
     public class Dish
     {
         public Guid Id { get; set; }
@@ -21,8 +22,10 @@ namespace DataAccessLayer.Entities
 
         [Required]
         [StringLength(500)]
+        [MinLength(25)]
         public string Ingredients { get; set; }
 
-        public IFormFile FormFile { get; set; }
+        [Required]
+        public string FilePath { get; set; }
     }
 }
