@@ -19,8 +19,13 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Ingredients" class="form-control form-control-lg" />
-                                    <label asp-for="Ingredients" class="form-label">Ingredients</label>
+                                    @*<input asp-for="Ingredients" class="form-control form-control-lg" />
+                                    <label asp-for="Ingredients" class="form-label">Ingredients</label>*@
+                                  <ul id="ingredientList">
+                                    <li class="ingredientInputItem">
+                                      <input id="ingredientInput" type="text" placeholder="Add ingredient" />
+                                    </li>
+                                  </ul>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -61,5 +66,6 @@
     @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/js/ingredientPills.js"></script>
     }
  }
