@@ -29,6 +29,10 @@ nav ul li {
   list-style: none;
 }
 
+.main {
+  z-index: 100 !important;
+}
+
 nav ul li a {
   display: block;
   font-family: "montserrat";

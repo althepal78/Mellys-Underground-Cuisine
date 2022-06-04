@@ -2,18 +2,21 @@
     ViewData["Title"] = "PillSpan";
 }
 
-<form id="z" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="bas">
-    <div>
-        <input class="wa" tabindex="-1" aria-hidden="true" />
-        <div></div>
-        <textarea name="tarea" id="tarea" cols="30" rows="30"></textarea>
-    </div>
-</form>
+<div class="outside-class">
+
+    <form id="z" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="bas">
+        <div>
+            <textarea rows="2" cols="40" id="randomNumber" class="vO mt-4" name="to"
+                      spellcheck="false" autocomplete="false" autocapitalize="off" autocorrect="off"
+                      tabindex="1" dir="ltr" aria-label="To" role="combobox" aria-autocomplete="list"></textarea>
+        </div>
+    </form>
+</div>
 @section Styles {
-    <link href="/css/PillSpan.css" rel="stylesheet" type="text/css" />
+    <link href="/css/PillsSpan.css" rel="stylesheet" type="text/css" />
 }
 
-@section Scripts {
-   <script src="~/js/PillSpan.js"></script>
+    @section Scripts {
+    <script src="~/js/PillSpan.js"></script>
  }
 
