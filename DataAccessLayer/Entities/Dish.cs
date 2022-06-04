@@ -25,7 +25,13 @@ namespace DataAccessLayer.Entities
         [MinLength(25)]
         public string Ingredients { get; set; }
 
-       
+
+        [Required]
+        public int Quantity { get; set; }
+
+        [Required]
+        public float Price { get; set; }
+
         public string FilePath { get; set; }
     }
 }
