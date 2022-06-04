@@ -46,6 +46,12 @@ namespace MellysUndergroundCuisine.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult PillSpan()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddDish(DishVM dish)
         {
