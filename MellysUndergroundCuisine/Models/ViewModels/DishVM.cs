@@ -13,19 +13,18 @@ namespace MellysUndergroundCuisine.Models.ViewModels
         [StringLength(100)]
         public string Name { get; set; }
 
-
         [Required]
         [StringLength(500)]
         [MinLength(45)]
         public string Information { get; set; }
 
-        public Ingredients Ingredients { get; set; }
+        public List<Ingredients> Ingredients { get; set; }
 
         [Required]
         public int Quantity { get; set; } 
 
         [Required]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         public string? FilePath { get; set; }
 
@@ -42,8 +41,5 @@ namespace MellysUndergroundCuisine.Models.ViewModels
                 return Information.Substring(0, 40);
             }
         }
-
-
-     
     }
 }

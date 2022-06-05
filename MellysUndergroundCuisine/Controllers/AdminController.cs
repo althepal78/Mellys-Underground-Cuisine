@@ -46,22 +46,19 @@ namespace MellysUndergroundCuisine.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public IActionResult PillSpan()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> AddDish(DishVM dish)
         {
-            Console.WriteLine("Inside Post AddDish");
+            
             if (!ModelState.IsValid)
             {
                 Console.WriteLine("failed Model State");
                 return View(dish);
             }
 
+            Console.WriteLine(dish.Ingredients.Count);
+            
+         
             if (dish.FoodImage.ContentType != "image/jpeg" && dish.FoodImage.ContentType != "image/png" && dish.FoodImage.ContentType != "image/svg+xml")
             {                
                 ModelState.AddModelError("File Type Error", "You're only allowed png, jpeg, or svg type files");

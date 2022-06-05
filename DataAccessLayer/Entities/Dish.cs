@@ -23,7 +23,7 @@ namespace DataAccessLayer.Entities
         public int Quantity { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         public string FilePath { get; set; }
     }
