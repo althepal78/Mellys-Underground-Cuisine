@@ -13,17 +13,17 @@
         
         var input = document.createElement("input");
         input.type = "text";
-        input.hidden = false;
+        input.hidden = true;
         input.setAttribute("id", "Ingredients");
         input.setAttribute("name", "Ingredients");
         input.setAttribute("data-val", "true")
         input.setAttribute("value", currentValue);
 
-        var li = document.createElement("li");
-        li.classList.add("ingredientInputItem", "badge", "rounded-pill", "ingredientPills");
-        li.appendChild(document.createTextNode(currentValue));
-        li.appendChild(input)
-        list.appendChild(li);
+        var span = document.createElement("span");
+        span.classList.add("ingredientInputItem", "badge", "rounded-pill", "ingredientPills");
+        span.appendChild(document.createTextNode(currentValue));
+        span.appendChild(input)
+        current.appendChild(span);
 
         //for text area you have to clear like this 
         current.value = "";

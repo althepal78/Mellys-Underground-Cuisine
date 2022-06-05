@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220604225823_initail")]
-    partial class initail
+    [Migration("20220605232049_PriceToDecimalFromFloat")]
+    partial class PriceToDecimalFromFloat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,8 +116,8 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

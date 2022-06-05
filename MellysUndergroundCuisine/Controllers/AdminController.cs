@@ -56,7 +56,7 @@ namespace MellysUndergroundCuisine.Controllers
                 return View(dish);
             }
 
-            Console.WriteLine(dish.Ingredients.Count);
+            Console.WriteLine(dish.Ingredients.Count + " is the count **********************************");
             
          
             if (dish.FoodImage.ContentType != "image/jpeg" && dish.FoodImage.ContentType != "image/png" && dish.FoodImage.ContentType != "image/svg+xml")
