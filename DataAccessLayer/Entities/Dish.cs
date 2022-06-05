@@ -1,11 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataAccessLayer.Entities
 {
-   
+
     public class Dish
     {
         public Guid Id { get; set; }
@@ -19,12 +16,8 @@ namespace DataAccessLayer.Entities
         [StringLength(500)]
         [MinLength(45)]
         public string Information { get; set; }
-
-        [Required]
-        [StringLength(500)]
-        [MinLength(25)]
-        public string Ingredients { get; set; }
-
+        
+        public ICollection<DishIngredient> DishIngredient { get; set; }
 
         [Required]
         public int Quantity { get; set; }

@@ -9,6 +9,8 @@
             <th>Name</th>
             <th>Ingredients</th>
             <th>Dish Information</th>
+            <th>Dish Price</th>
+            <th>Quantities Left</th>
         </tr>
     </thead>
     <tbody>
@@ -19,19 +21,21 @@
                 <tr>
                     <td><img src="@item.FilePath" class="img-thumbnail" /></td>
                     <td>@item.Name</td>
-                    <td>@item.IngredientsShort</td>
+
+                    <td>@item.InformationShort</td>
+                    <td>@item</td>
                     <td>@item.InformationShort</td>
                 </tr>
             }
         }
         else
         {
-             <tr>
-                    <td>Nada</td>
-                    <td>Nada</td>
-                    <td>Nada</td>
-                    <td>Nada</td>
-                </tr>
+            <tr>
+                <td>Nada</td>
+                <td>Nada</td>
+                <td>Nada</td>
+                <td>Nada</td>
+            </tr>
         }
     </tbody>
 </table>

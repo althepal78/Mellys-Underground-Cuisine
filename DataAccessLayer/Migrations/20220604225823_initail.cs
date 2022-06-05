@@ -5,10 +5,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "_ingredients",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__ingredients", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -76,8 +88,9 @@ namespace DataAccessLayer.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Information = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Ingredients = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -175,10 +188,39 @@ namespace DataAccessLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "_dishIngredients",
+                columns: table => new
+                {
+                    DishId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IngredientsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__dishIngredients", x => new { x.DishId, x.IngredientsId });
+                    table.ForeignKey(
+                        name: "FK__dishIngredients__dishes_DishId",
+                        column: x => x.DishId,
+                        principalTable: "_dishes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__dishIngredients__ingredients_IngredientsId",
+                        column: x => x.IngredientsId,
+                        principalTable: "_ingredients",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX__dishes_AppUserId",
                 table: "_dishes",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX__dishIngredients_IngredientsId",
+                table: "_dishIngredients",
+                column: "IngredientsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -223,7 +265,7 @@ namespace DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "_dishes");
+                name: "_dishIngredients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -239,6 +281,12 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "_dishes");
+
+            migrationBuilder.DropTable(
+                name: "_ingredients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -1,32 +1,38 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MellysUndergroundCuisine.Models.ViewModels
 {
     public class DishVM
     {
+        public Guid Id { get; set; }
+
         [Required]
+        [StringLength(100)]
         public string Name { get; set; }
+
 
         [Required]
         [StringLength(500)]
         [MinLength(45)]
         public string Information { get; set; }
 
-        [Required]
-        [StringLength(500)]
-        [MinLength(25)]
-        public string Ingredients { get; set; }
+        public Ingredients Ingredients { get; set; }
 
-        
+        [Required]
+        public int Quantity { get; set; } 
+
+        [Required]
+        public float Price { get; set; }
+
         public string? FilePath { get; set; }
 
         [NotMapped]
         public IFormFile FoodImage { get; set; }
 
-
-
-        // these are to shorten the ingredients and Information and when they get 
+        // these are to shorten the Information and when they get 
         // hovered on we will show full ingredients and informaiton
         [NotMapped]
         public string InformationShort
@@ -38,13 +44,6 @@ namespace MellysUndergroundCuisine.Models.ViewModels
         }
 
 
-        [NotMapped]
-        public string IngredientsShort
-        {
-            get
-            {
-                return Ingredients.Substring(0, 25);
-            }
-        }
+     
     }
 }

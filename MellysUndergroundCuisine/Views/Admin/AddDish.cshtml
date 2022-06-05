@@ -18,21 +18,47 @@
                                     <label class="form-label" asp-for="Name">Dish Name</label>
                                 </div>
 
-                                <div class="form-outline mb-4">
-                                    <input asp-for="Ingredients" class="form-control form-control-lg" />
-                                    <label asp-for="Ingredients" class="form-label">Ingredients</label>
-                                </div>
 
                                 <div class="form-outline mb-4">
                                     <input asp-for="Information" class="form-control form-control-lg" />
                                     <label asp-for="Information" class="form-label">DishInformation</label>
                                 </div>
 
-                                <div>
-                                    <textarea rows="2" cols="40" id="randomNumber" class="vO mt-4" name="to"
-                                              spellcheck="false" autocomplete="false" autocapitalize="off" autocorrect="off"
-                                              tabindex="1" dir="ltr" aria-label="To" role="combobox" aria-autocomplete="list"></textarea>
+                                <div class="form-outline  mb-4">
+                                    <input asp-for="Price" class="form-control form-control-lg" />
+                                    <label asp-for="Price" class="form-label">Price</label>
                                 </div>
+
+                                <div class="form-outline  mb-4">
+                                    <input asp-for="Quantity"  class="form-control form-control-lg" />
+                                    <label asp-for="Quantity" class="form-label">Quantity</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+
+
+                                    <ul id="ingredientList" >
+                                        <li class="ingredientInputItem">
+                                            <br />
+                                            <label for="Ingredients"> Add a comma to seperate the ingredients</label>
+                                            <textarea id="ingredientInput" spellcheck="false" autocomplete="false" autocapitalize="off" autocorrect="off"
+                                                      tabindex="1" dir="ltr" aria-label="To" role="combobox" aria-autocomplete="list" ></textarea>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                               <!--
+                                <div>
+                                    <textarea for="Ingredients" rows="2" cols="40" id="randomNumber" class="vO mt-4" name="to"
+                                              spellcheck="false" autocomplete="false" autocapitalize="off" autocorrect="off"
+                                              tabindex="1" dir="ltr" aria-label="To" role="combobox" aria-autocomplete="list">
+                                </textarea>
+                                    <label for="Ingredients" class="form-label"></label>
+
+                                </div>
+                                -->
+                                
 
 
 
@@ -43,7 +69,7 @@
 
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit"
+                                    <button type="submit" id="DishButton"
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                                         Add Dish
                                     </button>
@@ -67,5 +93,6 @@
     @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/js/adminpanel.js"></script>
     }
  }

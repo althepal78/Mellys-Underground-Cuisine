@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220602212208_NotMappedFormFile")]
-    partial class NotMappedFormFile
+    [Migration("20220604225823_initail")]
+    partial class initail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,12 +102,11 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Information")
+                    b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ingredients")
+                    b.Property<string>("Information")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -117,11 +116,47 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.ToTable("_dishes");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Entities.DishIngredient", b =>
+                {
+                    b.Property<Guid>("DishId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IngredientsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DishId", "IngredientsId");
+
+                    b.HasIndex("IngredientsId");
+
+                    b.ToTable("_dishIngredients");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Entities.Ingredients", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("_ingredients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -264,6 +299,25 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("AppUserId");
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Entities.DishIngredient", b =>
+                {
+                    b.HasOne("DataAccessLayer.Entities.Dish", "Dish")
+                        .WithMany("DishIngredient")
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccessLayer.Entities.Ingredients", "Ingredients")
+                        .WithMany("DishIngredient")
+                        .HasForeignKey("IngredientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dish");
+
+                    b.Navigation("Ingredients");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -318,6 +372,16 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Entities.AppUser", b =>
                 {
                     b.Navigation("Dishes");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Entities.Dish", b =>
+                {
+                    b.Navigation("DishIngredient");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Entities.Ingredients", b =>
+                {
+                    b.Navigation("DishIngredient");
                 });
 #pragma warning restore 612, 618
         }
