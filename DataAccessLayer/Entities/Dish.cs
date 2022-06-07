@@ -7,22 +7,22 @@ namespace DataAccessLayer.Entities
     {
         public Guid Id { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         public string Name { get; set; }
 
 
-        [Required]
+        //[Required]
         [StringLength(500)]
         [MinLength(45)]
         public string Information { get; set; }
         
         public ICollection<DishIngredient> DishIngredient { get; set; }
 
-        [Required]
+        //[Required]
         public int Quantity { get; set; }
 
-        [Required]
+        //[Required]
         public decimal Price { get; set; }
 
         public string FilePath { get; set; }

@@ -47,7 +47,7 @@ namespace MellysUndergroundCuisine.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDish(DishVM dish)
+        public async Task<IActionResult> AddDish(AddDishVM dish)
         {
             
             if (!ModelState.IsValid)
@@ -56,26 +56,26 @@ namespace MellysUndergroundCuisine.Controllers
                 return View(dish);
             }
 
-            Console.WriteLine(dish.Ingredients.Count + " is the count **********************************");
+            Console.WriteLine(dish.Dish.Ingredients.Count + " is the count **********************************");
             
          
-            if (dish.FoodImage.ContentType != "image/jpeg" && dish.FoodImage.ContentType != "image/png" && dish.FoodImage.ContentType != "image/svg+xml")
+            if (dish.Dish.FoodImage.ContentType != "image/jpeg" && dish.Dish.FoodImage.ContentType != "image/png" && dish.Dish.FoodImage.ContentType != "image/svg+xml")
             {                
                 ModelState.AddModelError("File Type Error", "You're only allowed png, jpeg, or svg type files");
                 return View(dish);
             }
             
-            if (dish.FoodImage != null)
+            if (dish.Dish.FoodImage != null)
             {
                 string folder = "images/foodimages/";
                 // create the path name
-                folder += Guid.NewGuid().ToString() + "_"+ dish.FoodImage.FileName;
+                folder += Guid.NewGuid().ToString() + "_"+ dish.Dish.FoodImage.FileName;
                 // combine paths to create the path
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 // make it the filepath So i can link to it 
-                dish.FilePath = "/" + folder;
+                dish.Dish.FilePath = "/" + folder;
                 // create the connection
-                await dish.FoodImage.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                await dish.Dish.FoodImage.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
                // log it out but I can't see it  anyways
 
             }
