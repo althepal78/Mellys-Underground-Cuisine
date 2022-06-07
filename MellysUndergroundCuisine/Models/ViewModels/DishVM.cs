@@ -18,7 +18,7 @@ namespace MellysUndergroundCuisine.Models.ViewModels
         [MinLength(45)]
         public string Information { get; set; }
 
-        public List<Ingredients> Ingredients { get; set; }
+        //public List<Ingredients> Ingredients { get; set; }
 
         [Required]
         public int Quantity { get; set; } 

@@ -1,4 +1,4 @@
-﻿@model MellysUndergroundCuisine.Models.ViewModels.AddDishVM
+﻿@model MellysUndergroundCuisine.Models.ViewModels.DishVM
 
 <section class="vh-100">
 
@@ -13,26 +13,26 @@
                             <form id="frmAddIngredient" asp-action="AddDish" asp-controller="Admin" enctype="multipart/form-data" method="post">
                                 <div class="val" asp-validation-summary="All"></div>
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Dish.Name" class="form-control form-control-lg" />
-                                    <label class="form-label" asp-for="Dish.Name">Dish Name</label>
+                                    <input asp-for="Name" class="form-control form-control-lg" />
+                                    <label class="form-label" asp-for="Name">Dish Name</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input asp-for="Dish.Information" class="form-control form-control-lg" />
-                                    <label asp-for="Dish.Information" class="form-label">DishInformation</label>
+                                    <input asp-for="Information" class="form-control form-control-lg" />
+                                    <label asp-for="Information" class="form-label">DishInformation</label>
                                 </div>
 
                                 <div class="form-outline  mb-4">
-                                    <input asp-for="Dish.Price" class="form-control form-control-lg" />
-                                    <label asp-for="Dish.Price" class="form-label">Price</label>
+                                    <input asp-for="Price" class="form-control form-control-lg" />
+                                    <label asp-for="Price" class="form-label">Price</label>
                                 </div>
 
                                 <div class="form-outline  mb-4">
-                                    <input asp-for="Dish.Quantity" class="form-control form-control-lg" />
-                                    <label asp-for="Dish.Quantity" class="form-label">Quantity</label>
+                                    <input asp-for="Quantity" class="form-control form-control-lg" />
+                                    <label asp-for="Quantity" class="form-label">Quantity</label>
                                 </div>
 
-                                <div class="form-outline mb-4">
+                                @*<div class="form-outline mb-4">
                                     <label for="Ingredients"> Add a comma to seperate the ingredients</label>
                                         <textarea id="ingredientInput" spellcheck="true" autocomplete="false" 
                                                   autocapitalize="off" autocorrect="off" tabindex="1" dir="ltr" 
@@ -40,11 +40,11 @@
                                     <ul id="ingredientList">
                                         
                                     </ul>
-                                </div>
+                                </div>*@
 
                                 <div class="form-outline  mb-4">
-                                    <input asp-for="Dish.FoodImage" class="form-control form-control-lg" />
-                                    <label asp-for="Dish.FoodImage" class="form-label">Browse</label>
+                                    <input asp-for="FoodImage" class="form-control form-control-lg" />
+                                    <label asp-for="FoodImage" class="form-label">Browse</label>
                                 </div>
 
 

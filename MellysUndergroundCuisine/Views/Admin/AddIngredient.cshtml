@@ -1,0 +1,26 @@
+﻿@model MellysUndergroundCuisine.Models.ViewModels.AddIngredientVM
+
+<div class="container-fluid m-0 p-0">
+    <div class="row justify-content-center m-0 p-0">
+        <div class="col-12 col-lg-8">
+            <ul id="ingredientList">
+            </ul>
+            <form id="frmAddIngredients">
+                <input type="hidden" id="DishId" name="DishId" value="@Model.DishId" />
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="/css/Register.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/js/addIngredient.js"></script>
+    }
+ }

@@ -35,44 +35,44 @@
     }
 })
 
-$('#btnAddDish').on('submit', function (e) {
-  //e.preventDefault();
-  let listItems = $('#ingredientList li');
-  let ingredientList = [];
-  $.each(listItems, function (key, value) {
-    ingredientList.push(value.innerHTML);
-  })
+//$('#btnAddDish').on('submit', function (e) {
+//  //e.preventDefault();
+//  let listItems = $('#ingredientList li');
+//  let ingredientList = [];
+//  $.each(listItems, function (key, value) {
+//    ingredientList.push(value.innerHTML);
+//  })
 
-  //let data = {
-  //  Dish_Name : $('#Dish_Name').val(),
-  //  Dish_Information : $('#Dish_Information').val(),
-  //  Dish_Price : $('#Dish_Price').val(),
-  //  Dish_Quantity : $('#Dish_Quantity').val(),
-  //  //Dish_FoodImage : $('#Dish_FoodImage')[0].files,
-  //  //all the other inputs
-  //  Dish_Ingredients : ingredientList
-  //};
+//  //let data = {
+//  //  Dish_Name : $('#Dish_Name').val(),
+//  //  Dish_Information : $('#Dish_Information').val(),
+//  //  Dish_Price : $('#Dish_Price').val(),
+//  //  Dish_Quantity : $('#Dish_Quantity').val(),
+//  //  //Dish_FoodImage : $('#Dish_FoodImage')[0].files,
+//  //  //all the other inputs
+//  //  Dish_Ingredients : ingredientList
+//  //};
 
-  let form = $('#frmAddIngredient')[0];
-  console.log(form);
-  let pageForm = new FormData(form);
-  pageForm.append("Dish.Ingredients", ingredientList);
-  console.log(pageForm.get("Dish.Name"));
+//  let form = $('#frmAddIngredient')[0];
+//  console.log(form);
+//  let pageForm = new FormData(form);
+//  pageForm.append("Dish.Ingredients", ingredientList);
+//  console.log(pageForm.get("Dish.Name"));
 
-  //$.ajax({
-  //  type: "post",
-  //  url: "/Admin/AddDish",
-  //  data: pageForm,
-  //  enctype: 'multipart/form-data',
-  //  contentType: false,
-  //  processData: false,
-  //  success: function (d) {
-  //    console.log(d);
-  //  },
-  //  error: function (xhr, resp, text) {
-  //    console.log(xhr);
-  //  }
-  //})
+//  //$.ajax({
+//  //  type: "post",
+//  //  url: "/Admin/AddDish",
+//  //  data: pageForm,
+//  //  enctype: 'multipart/form-data',
+//  //  contentType: false,
+//  //  processData: false,
+//  //  success: function (d) {
+//  //    console.log(d);
+//  //  },
+//  //  error: function (xhr, resp, text) {
+//  //    console.log(xhr);
+//  //  }
+//  //})
 
-  //POST to your action with ajax or fetch or whatever you want
-})
+//  //POST to your action with ajax or fetch or whatever you want
+//})
