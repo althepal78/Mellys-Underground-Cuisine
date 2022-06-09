@@ -120,7 +120,8 @@ namespace MellysUndergroundCuisine.Controllers
             {
                 ingredient.ID = exists.ID;
             }
-            Console.WriteLine(exists.Name);
+
+            
 
             if (ingredient.ID == Guid.Empty)
             {
