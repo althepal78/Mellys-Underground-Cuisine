@@ -105,14 +105,18 @@ namespace MellysUndergroundCuisine.Controllers
         public async Task<IActionResult> AddIngredient(AddIngredientVM vm)
         {
             Ingredients ingredient = new Ingredients();
-            var exists = _db._ingredients.FirstOrDefault(ing => ing.NormalizeName == vm.Name.ToUpper());
+            var trimName = vm.Name.Trim();
+            var normalizeTrimName = trimName.ToUpper();
+            var exists = _db._ingredients.FirstOrDefault(ing => ing.NormalizeName == normalizeTrimName);
+            
 
             //check you model
             if (exists is null)
             {
-                ingredient.Name = vm.Name;
+                ingredient.Name = trimName;
                 ingredient.ID = vm.ID;
-                ingredient.NormalizeName = vm.Name.ToUpper();
+                ingredient.NormalizeName = normalizeTrimName;
+
                 await _db._ingredients.AddAsync(ingredient);
                 await _db.SaveChangesAsync();
             }
@@ -121,13 +125,17 @@ namespace MellysUndergroundCuisine.Controllers
                 ingredient.ID = exists.ID;
             }
 
-            
-
             if (ingredient.ID == Guid.Empty)
             {
                 return BadRequest("Unable to save the igredient to the db");
             }
 
+            var inDishIng = _db._dishIngredients.Any(ing => ing.IngredientsId == ingredient.ID);
+
+            if (inDishIng)
+            {
+                return BadRequest("Already in dish");
+            }
 
             DishIngredient dishIngred = new DishIngredient
             {

@@ -1,4 +1,6 @@
-﻿$('#Name').on('keyup', function (e) {
+﻿
+
+$('#Name').on('keyup', function (e) {
     if (e.which == 188 || e.which == 13) {
         console.log("hit");
 
@@ -8,9 +10,10 @@
         if (currentValue.charCodeAt("/")) {
             currentValue = currentValue.replace(/\n/g, '');
         }
+        currentValue = currentValue.replace(/,/g, '');
 
         let dishId = document.getElementById('DishId').value;
-        currentValue = currentValue.replace(/,/g, '');
+       
         let ingredient = {
             DishId: dishId,
             Name: currentValue
@@ -32,6 +35,8 @@
             },
             error: function (xhr, resp, text) {
                 console.log(xhr);
+                toastr.error(xhr.responseText);
+                current.value = "";
             }
         })
 
