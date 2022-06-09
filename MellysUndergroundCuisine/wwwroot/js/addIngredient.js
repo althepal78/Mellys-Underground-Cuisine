@@ -34,7 +34,5 @@
         console.log(xhr);
       }
     })
-
-    
   }
 })
