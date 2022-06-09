@@ -47,40 +47,43 @@ namespace MellysUndergroundCuisine.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDish(DishVM dish)
+        public async Task<IActionResult> AddDish(DishVM dishVM)
         {
-            
+
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("failed Model State");
-                return View(dish);
+                ModelState.AddModelError("ModelFailure", "failed Model State");
+                return View(dishVM);
             }
 
-            Console.WriteLine(dish.Ingredients.Count + " is the count **********************************");
-            
-         
-            if (dish.FoodImage.ContentType != "image/jpeg" && dish.FoodImage.ContentType != "image/png" && dish.FoodImage.ContentType != "image/svg+xml")
-            {                
-                ModelState.AddModelError("File Type Error", "You're only allowed png, jpeg, or svg type files");
-                return View(dish);
-            }
-            
-            if (dish.FoodImage != null)
+
+            if (dishVM.FoodImage.ContentType != "image/jpeg" && dishVM.FoodImage.ContentType != "image/png" && dishVM.FoodImage.ContentType != "image/svg+xml")
             {
+                ModelState.AddModelError("File Type Error", "You're only allowed png, jpeg, or svg type files");
+                return View(dishVM);
+            }
+
+            if (dishVM.FoodImage != null)
+            {
+                //creating string to where the folders of the images will be
                 string folder = "images/foodimages/";
+
                 // create the path name
-                folder += Guid.NewGuid().ToString() + "_"+ dish.FoodImage.FileName;
+                folder += Guid.NewGuid().ToString() + "_" + dishVM.FoodImage.FileName;
+
                 // combine paths to create the path
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+
                 // make it the filepath So i can link to it 
-                dish.FilePath = "/" + folder;
+                dishVM.FilePath = "/" + folder;
+
                 // create the connection
-                await dish.FoodImage.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-               // log it out but I can't see it  anyways
+                await dishVM.FoodImage.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
 
             }
 
-            var newDish = _mapper.Map<Dish>(dish);
+            var newDish = _mapper.Map<Dish>(dishVM);
 
             await _db._dishes.AddAsync(newDish);
             await _db.SaveChangesAsync();
@@ -88,10 +91,59 @@ namespace MellysUndergroundCuisine.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        public IActionResult AddIngredient(string id)
+        {
+            AddIngredientVM vm = new AddIngredientVM
+            {
+                DishId = Guid.Parse(id)
+            };
+            return View(vm);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddIngredient(AddIngredientVM vm)
+        {
+            Ingredients ingredient = new Ingredients();
+            var exists = _db._ingredients.FirstOrDefault(ing => ing.NormalizeName == vm.Name.ToUpper());
+
+            //check you model
+            if (exists is null)
+            {
+                ingredient.Name = vm.Name;
+                ingredient.ID = vm.ID;
+                ingredient.NormalizeName = vm.Name.ToUpper();
+                await _db._ingredients.AddAsync(ingredient);
+                await _db.SaveChangesAsync();
+            }
+            else
+            {
+                ingredient.ID = exists.ID;
+            }
+            Console.WriteLine(exists.Name);
+
+            if (ingredient.ID == Guid.Empty)
+            {
+                return BadRequest("Unable to save the igredient to the db");
+            }
+
+
+            DishIngredient dishIngred = new DishIngredient
+            {
+                DishId = vm.DishId,
+                IngredientsId = ingredient.ID
+            };
+
+            await _db._dishIngredients.AddAsync(dishIngred);
+            await _db.SaveChangesAsync();
+
+            return Ok(vm);
+        }
 
         public IActionResult EditDish()
         {
             return View();
         }
     }
+
 }

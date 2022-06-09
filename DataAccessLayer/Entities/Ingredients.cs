@@ -1,5 +1,4 @@
-﻿
-namespace DataAccessLayer.Entities
+﻿namespace DataAccessLayer.Entities
 {
     public class Ingredients
     {
@@ -7,6 +6,8 @@ namespace DataAccessLayer.Entities
 
         public string Name { get; set; }
 
-        public ICollection<DishIngredient> DishIngredient{ get; set; }
+        public string? NormalizeName { get; set; }
+
+        public ICollection<DishIngredient> DishIngredient { get; set; }
     }
 }
