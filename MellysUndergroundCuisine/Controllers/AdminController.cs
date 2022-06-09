@@ -24,17 +24,18 @@ namespace MellysUndergroundCuisine.Controllers
         }
         public IActionResult Index()
         {
-            var allDishes = _db._dishes.ToList();
-            List<DishVM> dishVM;
-            if (allDishes != null)
+            var dishIng = _db._dishIngredients.ToList();
+            if(dishIng is null)
             {
-                dishVM = _mapper.Map<List<DishVM>>(allDishes);
+                Console.WriteLine("shit is null ");
             }
             else
             {
-                dishVM = new List<DishVM>();
+                ViewBag.DishesInDB = dishIng;
             }
-            return View(dishVM);
+          
+
+            return View(dishIng);
         }
         public IActionResult SidePanel()
         {
