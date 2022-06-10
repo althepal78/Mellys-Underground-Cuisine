@@ -1,9 +1,9 @@
-﻿@using MellysUndergroundCuisine.Models.ViewModels
-@model List<DishVM>
+﻿@using DataAccessLayer.Entities
+@model List<Dish>
 
 <div class="container-fluid m-0 p-0">
     <div class="row justify-content-center m-0 p-0">
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-12">
             <table class="table bg-black table-dark table-hover text-light border-5 border-secondary mt-2">
                 <thead class="">
                     <tr>
@@ -24,8 +24,20 @@
                             <tr>
                                 <td><img src="@item.FilePath" class="img-thumbnail" /></td>
                                 <td>@item.Name</td>
-                                <td>@ViewBag.DishesInDB</td>
-                                <td>@item.Information</td>
+                                @if(item.DishIngredient != null)
+                                {<td>
+                                    @foreach(var ing in item.DishIngredient)
+                                    {
+                                      <h4><span class="badge bg-black text-secondary">@ing.Ingredients.Name</span><span class="badge bg-black text-secondary">
+                                          <a class="text-white" asp-action="Delete" asp-controller="Admin">X</a></span></h4>
+                                    }
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>No Ingredients yet</td>
+                                }
+                                <td>@item.Information.Substring(0,50)</td>
                                 <td>$ @item.Price.ToString("0.00") </td>
                                 <td>@item.Quantity</td>
                                 <td>

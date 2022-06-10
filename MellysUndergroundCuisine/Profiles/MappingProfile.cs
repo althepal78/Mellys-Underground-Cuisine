@@ -10,6 +10,7 @@ namespace MellysUndergroundCuisine.Profiles
         {
             CreateMap<AppUser, AppUserVM>().ReverseMap();
             CreateMap<Dish, DishVM>().ReverseMap();
+            CreateMap<Dish, IndexVM>().ReverseMap();
         }
     }
 }

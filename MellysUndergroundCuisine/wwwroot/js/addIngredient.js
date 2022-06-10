@@ -1,6 +1,4 @@
-﻿
-
-$('#Name').on('keyup', function (e) {
+﻿$('#Name').on('keyup', function (e) {
     if (e.which == 188 || e.which == 13) {
         console.log("hit");
 
@@ -13,7 +11,7 @@ $('#Name').on('keyup', function (e) {
         currentValue = currentValue.replace(/,/g, '');
 
         let dishId = document.getElementById('DishId').value;
-       
+
         let ingredient = {
             DishId: dishId,
             Name: currentValue

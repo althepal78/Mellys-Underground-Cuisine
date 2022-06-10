@@ -4,6 +4,7 @@ using DataAccessLayer.Entities;
 using MellysUndergroundCuisine.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MellysUndergroundCuisine.Controllers
 {
@@ -24,18 +25,12 @@ namespace MellysUndergroundCuisine.Controllers
         }
         public IActionResult Index()
         {
-            var dishIng = _db._dishIngredients.ToList();
-            if(dishIng is null)
-            {
-                Console.WriteLine("shit is null ");
-            }
-            else
-            {
-                ViewBag.DishesInDB = dishIng;
-            }
-          
+            List<Dish> exists = _db._dishes
+                .Include(di => di.DishIngredient)
+                .ThenInclude(ing => ing.Ingredients).ToList();
 
-            return View(dishIng);
+            return View(exists);
+            
         }
         public IActionResult SidePanel()
         {
