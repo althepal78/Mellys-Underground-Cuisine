@@ -2,20 +2,27 @@
 
 <div class="container-fluid m-0 p-0">
     <div class="row justify-content-center m-0 p-0">
-        <div class="col-12 col-lg-12">            
-                <input type="hidden" id="DishId" name="DishId" value="@Model.DishId" />
-                <label asp-for="Name" class="form-label">Add a comma for each ingredient</label>
-                <input asp-for="Name" class="form-control" />
-         </div>
-         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-             <ul id="ingredientList">
-                    @if (ViewBag.DishIngredient != null)
+        <div class="col-12 col-lg-12">
+            <input type="hidden" id="DishId" name="DishId" value="@Model.DishId" />
+            <label asp-for="Name" class="form-label">Add a comma for each ingredient</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="ingredientList">
+                @if (ViewBag.DishIngredient != null)
+                {
+                    foreach (var item in ViewBag.DishIngredient)
                     {
-                        
+                        <span class="badge bg-black text-secondary">
+                            @item.Ingredients.Name <span class="badge bg-black text-secondary">
+                                <a class="text-white"  asp-action="Delete" asp-controller="Admin" asp-route-id="">X</a>
+                            </span>
+                        </span>
                     }
-          
-            </ul>
-         </div>
+                }
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -23,7 +30,7 @@
     <link href="/css/Register.css" rel="stylesheet" type="text/css" />
 }
 
-@section Scripts {
+    @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
         <script src="~/js/addIngredient.js"></script>

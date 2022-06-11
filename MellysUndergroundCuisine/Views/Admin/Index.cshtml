@@ -28,9 +28,13 @@
                                 {<td>
                                     @foreach(var ing in item.DishIngredient)
                                     {
+                                        
                                       <h4><span class="badge bg-black text-secondary">@ing.Ingredients.Name <span class="badge bg-black text-secondary">
-                                          <a class="text-white" asp-action="Delete" asp-controller="Admin">X</a></span></span></h4>
-                                    }
+                                          <a class="text-white" asp-action="Delete"   
+                                                                asp-controller="Admin" 
+                                                                asp-route-dishID="@ing.DishId" 
+                                                                asp-route-ingID="@ing.IngredientsId">X</a></span></span></h4>
+                                    }   
                                     </td>
                                 }
                                 else

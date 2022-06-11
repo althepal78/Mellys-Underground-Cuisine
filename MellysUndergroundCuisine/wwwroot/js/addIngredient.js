@@ -24,16 +24,24 @@
             success: function (data) {
                 var list = document.getElementById('ingredientList');
 
-                var item = document.createElement("li");
+                var item = document.createElement("span");
                 item.classList.add("ingredientInputItem", "badge", "bg-black", "text-secondary");
                 item.appendChild(document.createTextNode(currentValue));
 
                 var span = document.createElement("span");
                 span.classList.add( "badge", "bg-black", "text-white");
-                span.value = "X";
+                
 
+              
+                var a = document.createElement("a");
+                a.classList.add("text-white");
+                a.href = "/Admin/Delete";
+                a.innerText = "X";
 
-                item.appendChild(span);
+                span.appendChild(a);
+               
+
+                item.append(span);
 
                 list.appendChild(item);
 

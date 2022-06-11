@@ -158,6 +158,12 @@ namespace MellysUndergroundCuisine.Controllers
 
             return Ok(vm);
         }
+        public async Task<IActionResult> DeleteIngredient(Guid dishID, Guid IngID)
+        {
+            var something = await _db._dishIngredients.FirstOrDefaultAsync(di=> di.DishId == dishID);
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult EditDish()
         {
