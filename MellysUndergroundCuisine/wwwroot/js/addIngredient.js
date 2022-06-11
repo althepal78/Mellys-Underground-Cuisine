@@ -25,11 +25,21 @@
                 var list = document.getElementById('ingredientList');
 
                 var item = document.createElement("li");
-                item.classList.add("ingredientInputItem", "badge", "rounded-pill", "ingredientPills");
+                item.classList.add("ingredientInputItem", "badge", "bg-black", "text-secondary");
                 item.appendChild(document.createTextNode(currentValue));
+
+                var span = document.createElement("span");
+                span.classList.add( "badge", "bg-black", "text-white");
+                span.value = "X";
+
+
+                item.appendChild(span);
+
                 list.appendChild(item);
 
                 current.value = "";
+
+                toastr.success('Successfully Added The Ingredient');
             },
             error: function (xhr, resp, text) {
                 console.log(xhr);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace MellysUndergroundCuisine.Controllers
 {
     [Authorize]
@@ -30,7 +31,7 @@ namespace MellysUndergroundCuisine.Controllers
                 .ThenInclude(ing => ing.Ingredients).ToList();
 
             return View(exists);
-            
+
         }
         public IActionResult SidePanel()
         {
@@ -93,6 +94,19 @@ namespace MellysUndergroundCuisine.Controllers
             {
                 DishId = Guid.Parse(id)
             };
+
+            var dish = _db._dishes.Include(di => di.DishIngredient)
+                                  .ThenInclude(ing => ing.Ingredients)
+                                   .FirstOrDefault(di => di.Id == Guid.Parse(id));
+            if (dish != null)
+            {
+                if (dish.DishIngredient != null)
+                {
+                    ViewBag.DishIngredient = dish.DishIngredient.ToList();
+                }
+
+            }
+
             return View(vm);
         }
 
@@ -104,7 +118,7 @@ namespace MellysUndergroundCuisine.Controllers
             var trimName = vm.Name.Trim();
             var normalizeTrimName = trimName.ToUpper();
             var exists = _db._ingredients.FirstOrDefault(ing => ing.NormalizeName == normalizeTrimName);
-            
+
 
             //check you model
             if (exists is null)

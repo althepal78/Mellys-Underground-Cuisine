@@ -1,14 +1,20 @@
-﻿
-@model MellysUndergroundCuisine.Models.ViewModels.AddIngredientVM
+﻿@model MellysUndergroundCuisine.Models.ViewModels.AddIngredientVM
 
 <div class="container-fluid m-0 p-0">
     <div class="row justify-content-center m-0 p-0">
-        <div class="col-12 col-lg-8">
-            <ul id="ingredientList">
-            </ul>
+        <div class="col-12 col-lg-12">            
                 <input type="hidden" id="DishId" name="DishId" value="@Model.DishId" />
                 <label asp-for="Name" class="form-label">Add a comma for each ingredient</label>
                 <input asp-for="Name" class="form-control" />
+         </div>
+         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+             <ul id="ingredientList">
+                    @if (ViewBag.DishIngredient != null)
+                    {
+                        
+                    }
+          
+            </ul>
          </div>
     </div>
 </div>

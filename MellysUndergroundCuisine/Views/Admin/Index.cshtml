@@ -28,8 +28,8 @@
                                 {<td>
                                     @foreach(var ing in item.DishIngredient)
                                     {
-                                      <h4><span class="badge bg-black text-secondary">@ing.Ingredients.Name</span><span class="badge bg-black text-secondary">
-                                          <a class="text-white" asp-action="Delete" asp-controller="Admin">X</a></span></h4>
+                                      <h4><span class="badge bg-black text-secondary">@ing.Ingredients.Name <span class="badge bg-black text-secondary">
+                                          <a class="text-white" asp-action="Delete" asp-controller="Admin">X</a></span></span></h4>
                                     }
                                     </td>
                                 }
@@ -41,6 +41,7 @@
                                 <td>$ @item.Price.ToString("0.00") </td>
                                 <td>@item.Quantity</td>
                                 <td>
+                                    
                                     <a asp-controller="Admin" asp-action="AddIngredient" asp-route-id="@item.Id">Add Ingredients</a>
                                 </td>
                             </tr>
