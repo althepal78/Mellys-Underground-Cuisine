@@ -100,6 +100,7 @@ namespace MellysUndergroundCuisine.Controllers
                                    .FirstOrDefault(di => di.Id == Guid.Parse(id));
             if (dish != null)
             {
+
                 if (dish.DishIngredient != null)
                 {
                     ViewBag.DishIngredient = dish.DishIngredient.ToList();
@@ -160,7 +161,7 @@ namespace MellysUndergroundCuisine.Controllers
         }
         public async Task<IActionResult> DeleteIngredient(Guid dishID, Guid IngID)
         {
-            var something = await _db._dishIngredients.FirstOrDefaultAsync(di=> di.DishId == dishID);
+            var something = await _db._dishIngredients.FirstOrDefaultAsync(di => di.DishId == dishID);
             return RedirectToAction("Index");
         }
 
