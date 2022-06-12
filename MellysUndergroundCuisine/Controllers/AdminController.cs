@@ -90,24 +90,14 @@ namespace MellysUndergroundCuisine.Controllers
 
         public IActionResult AddIngredient(string id)
         {
+
+            var dishIngredients = _db._dishIngredients.Where(x => x.DishId == Guid.Parse(id)).Include(ing => ing.Ingredients).Select(x => x.Ingredients).ToList();
+
             AddIngredientVM vm = new AddIngredientVM
             {
-                DishId = Guid.Parse(id)
+                DishId = Guid.Parse(id),
+                Ingredients = dishIngredients
             };
-
-            var dish = _db._dishes.Include(di => di.DishIngredient)
-                                  .ThenInclude(ing => ing.Ingredients)
-                                   .FirstOrDefault(di => di.Id == Guid.Parse(id));
-            if (dish != null)
-            {
-
-                if (dish.DishIngredient != null)
-                {
-                    ViewBag.DishIngredient = dish.DishIngredient.ToList();
-                }
-
-            }
-
             return View(vm);
         }
 
@@ -161,8 +151,31 @@ namespace MellysUndergroundCuisine.Controllers
         }
         public async Task<IActionResult> DeleteIngredient(Guid dishID, Guid IngID)
         {
-            var something = await _db._dishIngredients.FirstOrDefaultAsync(di => di.DishId == dishID);
-            return RedirectToAction("Index");
+            var ingredientsInDish = _db._dishIngredients.Where(gu => gu.DishId == dishID).Include(ingd => ingd.Ingredients).ToList();
+          
+
+            if (ingredientsInDish is null)
+            {
+                Console.WriteLine("dish is null");
+            }
+            else
+            {
+                
+                foreach(var ingd in ingredientsInDish)
+                {
+                    if(ingd.IngredientsId == IngID)
+                    {                       
+                        _db._dishIngredients.Remove(ingd);
+                        await _db.SaveChangesAsync();
+                    }
+                }
+
+            }
+
+            Console.WriteLine(" ******************************");
+
+
+            return RedirectToAction("AddIngredient", "Admin", new { id = dishID.ToString() });
         }
 
 

@@ -48,7 +48,7 @@
                 current.value = "";
 
                 toastr.success('Successfully Added The Ingredient');
-                setInterval('location.reload()');  
+                setInterval('location.reload()', 500);  
             },
             error: function (xhr, resp, text) {
                 console.log(xhr);
